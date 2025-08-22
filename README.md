@@ -95,7 +95,7 @@ python main.py
 ## Sample Output for CSV
 
 
-
+---
 ## 🤝 Contributing  
 Contributions are welcome! Feel free to fork this repo, create a branch, and submit a PR.  
 
