@@ -89,7 +89,7 @@ python main.py
 ---
 
 ## 📸 Sample Output
-![detection_tracking_1](https://github.com/user-attachments/assets/1f2cd52d-a221-4283-ad64-49240b80754b)
+![detection_tracking_2 (1)](https://github.com/user-attachments/assets/1a65d987-95c1-40be-b101-e5b58a9d0f2f)
 
 ---
 
