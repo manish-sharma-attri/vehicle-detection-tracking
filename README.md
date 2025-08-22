@@ -93,6 +93,7 @@ python main.py
 
 ---
 ## Sample Output for CSV
+<img width="573" height="438" alt="image" src="https://github.com/user-attachments/assets/dd366a43-2bb1-4d61-866a-a4f164fa43ec" />
 
 
 ---
