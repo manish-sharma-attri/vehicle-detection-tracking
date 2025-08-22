@@ -88,8 +88,8 @@ python main.py
 
 ---
 
-## 📸 Sample Output  
-(Attach screenshots or a short demo GIF here)  
+## 📸 Sample Output
+![detection_tracking_1](https://github.com/user-attachments/assets/1f2cd52d-a221-4283-ad64-49240b80754b)
 
 ---
 
