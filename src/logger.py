@@ -14,11 +14,11 @@ class VehicleLogger:
         if not os.path.exists(filepath):
             with open(filepath, mode="w", newline="") as f:
                 writer = csv.writer(f)
-                writer.writerow(["timestamp", "vehicle_id", "plate", "confidence", "speed_kmh"])
+                writer.writerow(["timestamp","frame_no", "vehicle_id", "vehicle_class", "plate", "plate_confidence", "speed_kmh"])
 
-    def log(self, vehicle_id, plate, conf, speed_kmh):
+    def log(self, frame_no, vehicle_id, vehicle_class, plate, conf, speed_kmh):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         with open(self.filepath, mode="a", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([timestamp, vehicle_id, plate, f"{conf:.2f}", f"{speed_kmh:.2f}"])
+            writer.writerow([timestamp, frame_no, vehicle_id, vehicle_class, plate, f"{conf:.2f}", f"{speed_kmh:.2f}"])
