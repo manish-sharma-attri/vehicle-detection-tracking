@@ -21,7 +21,7 @@ async def process_video_api(file: UploadFile = File(...)):
 
     # Output paths
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    output_video = os.path.join(OUTPUT_DIR, f"processed_{file.filename}")
+    output_video = os.path.join(OUTPUT_DIR, f"processed_{file.filename}_{timestamp}.mp4")
     output_csv = os.path.join(OUTPUT_DIR, f"vehicle_log_{timestamp}.csv")
 
     # Run detection pipeline

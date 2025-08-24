@@ -1,4 +1,4 @@
-import cv2
+import cv2,os
 from .detector import YoloDetector
 from .tracker import Tracker
 from .utils import detect_and_read_plate
@@ -12,17 +12,19 @@ SPEED_LIMITS = {
     "bus": 60,
     "motorbike": 70
 }
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # folder of main.py
+ANPR_PATH = os.path.join(BASE_DIR, "..", "models", "ANPR.pt")
+YOLO_PATH = os.path.join(BASE_DIR, "..", "models", "yolo11n.pt")
 def process_video(input_video,output_video,output_csv):
     # ---------------------------
     # Load models
     # ---------------------------
     vehicle_detector = YoloDetector(
-        model_path=r"E:\vehicle_number_plate_detection\models\yolo11n.pt",
+        model_path=YOLO_PATH,
         confidence=0.5
     )
 
-    anpr_model = YOLO(r"E:\vehicle_number_plate_detection\models\ANPR.pt")
+    anpr_model = YOLO(ANPR_PATH)
     tracker = Tracker()
     class_map={}
     # ---------------------------
