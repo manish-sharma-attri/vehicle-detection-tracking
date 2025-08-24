@@ -6,6 +6,13 @@ from ultralytics import YOLO
 from .speed_estimate import SpeedEstimator
 from .logger import VehicleLogger
 
+SPEED_LIMITS = {
+    "car": 80,
+    "truck": 60,
+    "bus": 60,
+    "motorbike": 70
+}
+
 def process_video(input_video,output_video,output_csv):
     # ---------------------------
     # Load models
@@ -67,12 +74,20 @@ def process_video(input_video,output_video,output_csv):
             class_name = class_map.get(idx,"unknown")
             # --- Speed ---
             speed_kmh = speed_estimator.estimate_speed(tracking_id, (x1, y1, x2, y2), frame_count)
-
+            # Speed limit check
+            speed_limit = SPEED_LIMITS.get(class_name, 80)
+            # Check overspeed
+            if speed_kmh > speed_limit:
+                color = (0, 0, 255)  # RED for overspeed
+                status = "OVERSPEED"
+            else:
+                color = (0, 255, 0)  # GREEN normal
+                status = "NORMAL"
             # --- Vehicle box ---
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 5)
-            cv2.putText(frame, f"ID {tracking_id} | {speed_kmh:.1f} km/h | {class_name}",
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color, 5)
+            cv2.putText(frame, f"ID {tracking_id} | {class_name} | {speed_kmh:.1f} km/h | {status}",
                         (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1,
-                        (255, 255, 0), 3)
+                        color, 3)
 
             # --- Plate detection ---
             plates = detect_and_read_plate(frame, (x1, y1, x2, y2), anpr_model)
@@ -87,7 +102,7 @@ def process_video(input_video,output_video,output_csv):
                                 1, (0, 255, 0), 3)
 
                 # --- Log to CSV ---
-                logger.log(frame_count,tracking_id,class_name, text, conf, speed_kmh)
+                logger.log(frame_count,tracking_id,class_name, text, conf, speed_kmh,status)
 
         # Write frame
         out.write(frame)
