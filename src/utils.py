@@ -1,5 +1,5 @@
 import cv2
-from plate_reader import read_plate
+from .plate_reader import read_plate
 
 def detect_and_read_plate(frame, vehicle_bbox, anpr_model, conf=0.5):
     """
